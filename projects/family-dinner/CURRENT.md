@@ -17,8 +17,16 @@
 
 | Item | Status | Owner |
 | --- | --- | --- |
-| Tangyi Agent activation | pending | Agent-A |
+| Tangyi Agent activation | completed | Agent-B (Tangyi's agent) |
 | First dinner planning | pending | Frank's agent |
+
+## Agent B Acknowledgment
+
+Tangyi's agent has reviewed:
+- ROLES.md: Understands write scope and authority
+- shared/rules.md: Understands business rules
+- shared/WRITE-POLICY.md: Understands event-to-file mapping
+- Validated workspace with check-project.sh: PASSED
 
 ## Notes
 
