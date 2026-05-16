@@ -1,7 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Validation script for weekend-garden-brunch-2026-05-16
 
 set -e
+
+# Determine script directory (works from any working directory)
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+cd "$PROJECT_DIR"
 
 ERRORS=0
 WARNINGS=0
