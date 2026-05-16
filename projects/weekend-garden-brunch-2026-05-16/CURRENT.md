@@ -10,11 +10,16 @@ yellow (setup phase)
 2026-05-16
 
 ## Open Items
+- [x] Casey Agent onboarding briefing completed
 - [ ] Define roles and authority
 - [ ] Create initial menu proposal
 - [ ] Confirm guest list
 - [ ] Plan garden setup
 - [ ] Assign shopping tasks
+
+## Agent Status
+- Jordan Agent: active (seed)
+- Casey Agent: active (participant, briefing complete)
 
 ## Notifications
 None

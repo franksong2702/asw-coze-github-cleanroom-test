@@ -90,17 +90,18 @@ else
     ((ERRORS++))
 fi
 
-# Incoming tasks
-if [ -f "runtime/incoming/2026-05-16-casey-briefing.md" ]; then
-    echo "[PASS] 2026-05-16-casey-briefing.md exists"
-    if grep -qE "^Confirmation Required: no$" runtime/incoming/2026-05-16-casey-briefing.md || grep -A1 "^## Confirmation Required" runtime/incoming/2026-05-16-casey-briefing.md | grep -q "^no$"; then
+# Incoming tasks - briefing task can be in incoming/ or done/
+if [ -f "runtime/incoming/2026-05-16-casey-briefing.md" ] || [ -f "runtime/incoming/done/2026-05-16-casey-briefing.md" ]; then
+    echo "[PASS] 2026-05-16-casey-briefing.md exists (incoming or done)"
+    BRIEFING_FILE=$( [ -f "runtime/incoming/2026-05-16-casey-briefing.md" ] && echo "runtime/incoming/2026-05-16-casey-briefing.md" || echo "runtime/incoming/done/2026-05-16-casey-briefing.md" )
+    if grep -qE "^Confirmation Required: no$" "$BRIEFING_FILE" || grep -A1 "^## Confirmation Required" "$BRIEFING_FILE" | grep -q "^no$"; then
         echo "[PASS] casey-briefing has Confirmation Required: no"
     else
         echo "[ERROR] casey-briefing missing 'Confirmation Required: no'"
         ((ERRORS++))
     fi
 else
-    echo "[ERROR] runtime/incoming/2026-05-16-casey-briefing.md missing"
+    echo "[ERROR] 2026-05-16-casey-briefing.md missing from incoming/ and done/"
     ((ERRORS++))
 fi
 
