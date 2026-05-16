@@ -74,6 +74,55 @@ if [ -f "TASKS.md" ]; then
     fi
 fi
 
+# Write policy
+if [ -f "shared/WRITE-POLICY.md" ]; then
+    echo "[PASS] shared/WRITE-POLICY.md exists"
+else
+    echo "[ERROR] shared/WRITE-POLICY.md missing"
+    ((ERRORS++))
+fi
+
+# One-shot join message
+if [ -f "artifacts/casey-one-shot-join-message.md" ]; then
+    echo "[PASS] artifacts/casey-one-shot-join-message.md exists"
+else
+    echo "[ERROR] artifacts/casey-one-shot-join-message.md missing"
+    ((ERRORS++))
+fi
+
+# Incoming tasks
+if [ -f "runtime/incoming/2026-05-16-casey-briefing.md" ]; then
+    echo "[PASS] 2026-05-16-casey-briefing.md exists"
+    if grep -qE "^Confirmation Required: no$" runtime/incoming/2026-05-16-casey-briefing.md || grep -A1 "^## Confirmation Required" runtime/incoming/2026-05-16-casey-briefing.md | grep -q "^no$"; then
+        echo "[PASS] casey-briefing has Confirmation Required: no"
+    else
+        echo "[ERROR] casey-briefing missing 'Confirmation Required: no'"
+        ((ERRORS++))
+    fi
+else
+    echo "[ERROR] runtime/incoming/2026-05-16-casey-briefing.md missing"
+    ((ERRORS++))
+fi
+
+if [ -f "runtime/incoming/2026-05-16-casey-wake-runner-proposal.md" ]; then
+    echo "[PASS] 2026-05-16-casey-wake-runner-proposal.md exists"
+    if grep -qE "^Confirmation Required: yes$" runtime/incoming/2026-05-16-casey-wake-runner-proposal.md || grep -A1 "^## Confirmation Required" runtime/incoming/2026-05-16-casey-wake-runner-proposal.md | grep -q "^yes$"; then
+        echo "[PASS] wake-runner-proposal has Confirmation Required: yes"
+    else
+        echo "[ERROR] wake-runner-proposal missing 'Confirmation Required: yes'"
+        ((ERRORS++))
+    fi
+    if grep -q "批准花园早午餐本机设置" runtime/incoming/2026-05-16-casey-wake-runner-proposal.md; then
+        echo "[PASS] wake-runner-proposal has approval phrase"
+    else
+        echo "[ERROR] wake-runner-proposal missing approval phrase"
+        ((ERRORS++))
+    fi
+else
+    echo "[ERROR] runtime/incoming/2026-05-16-casey-wake-runner-proposal.md missing"
+    ((ERRORS++))
+fi
+
 echo ""
 echo "=== Summary ==="
 echo "Errors: $ERRORS"
